@@ -1,0 +1,70 @@
+.title {
+    margin: 50px 0 10px;
+    text-align: center;
+    color: #212121;
+    font-weight: 600;
+}
+.info__box, .create__form, .filter__form {
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+}
+.create__form {
+    gap: 5px;
+    margin: 10px 0;
+}
+.filter__form {
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.create__input, .filter__input {
+    padding: 5px 12px;
+    outline: none;
+    border: 1px solid #757575;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border 200ms ease-in-out;
+    color: #212121;
+}
+.create__input::placeholder {
+    color: #757575;
+    transition: color 200ms ease-in-out;
+}
+.create__input:focus::placeholder {
+    color: #165916;
+}
+.create__input:focus {
+    border-color: #165916;
+}
+.create__button {
+    padding: 4px 12px;
+    border-radius: 5px;
+    border: 1px solid #757575;
+    color: #212121;
+    background-color:#71f371;
+    transition: background 200ms ease-in-out;
+}
+.create__button:hover {
+    background-color: #3dcc3d;
+}
+.filter__input {
+    padding: 3px 9px;
+}
+.todo_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+}
+.todo_item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.check {
+    /* appearance: none; */
+    width: 15px;
+    height: 15px;
+}

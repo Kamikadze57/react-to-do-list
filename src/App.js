@@ -13,13 +13,40 @@ class App extends Component {
       { id: "2", text: "Розібратися з React Router", completed: false },
       { id: "3", text: "Пережити Redux", completed: false },
     ],
+    text: "",
     filter: "",
   };
-  filterTodos = (filterValue) => {
-    this.setState({ filter: filterValue });
+  Change = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   };
-  formChange = (value) => {
-    this.filterTodos(value);
+  FilterChange = (e) => {
+    this.setState({
+      filter: e.target.value,
+    });
+  };
+  AddTodo = (textValue) => {
+    const LastId = this.state.todos.reduce((max, todos) => Math.max(max, Number(todos.id)), 0);
+    const newId = (LastId + 1).toString();
+
+    const newTodo = {
+      id: newId,
+      text: this.state.text,
+      completed: this.state.completed,
+    };
+
+    this.setState((prevState) => ({
+      todos: [...prevState.todos, newTodo],
+      text: "",
+      completed: false,
+    }));
+  };
+
+  getFilteredTodo = () => {
+    const { todos, filter } = this.state;
+    const normalizedFilter = (filter || "").toLowerCase();
+    return todos.filter((todo) => todo.text.toLowerCase().includes(normalizedFilter));
   };
   toggleTodo = (id) => {
     this.setState(({ todos }) => {
@@ -45,9 +72,9 @@ class App extends Component {
       <div className="app">
         <h1 className="title">Список справ</h1>
         <Info allTasks={this.state.todos.length} compTasks={this.state.todos.filter((todo) => todo.completed).length} />
-        <ToDoCreate />
-        <Filter onChange={this.formChange} />
-        <ToDoList todos={this.state.todos} onToggle={this.toggleTodo} onDelete={this.deleteTodo} />
+        <ToDoCreate text={this.state.text} onChange={this.Change} onAdd={this.AddTodo} />
+        <Filter filterValue={this.state.filter} onFilterChange={this.FilterChange} />
+        <ToDoList todos={this.getFilteredTodo()} onToggle={this.toggleTodo} onDelete={this.deleteTodo} />
       </div>
     );
   }
