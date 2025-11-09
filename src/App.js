@@ -26,7 +26,11 @@ class App extends Component {
       filter: e.target.value,
     });
   };
-  AddTodo = (textValue) => {
+  AddTodo = () => {
+    if (!this.state.text.trim()) {
+      console.log("Пусто((");
+      return; 
+  }
     const LastId = this.state.todos.reduce((max, todos) => Math.max(max, Number(todos.id)), 0);
     const newId = (LastId + 1).toString();
 
